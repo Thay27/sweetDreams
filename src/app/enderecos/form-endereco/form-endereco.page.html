@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="font-family: 'Pristina'; font-size: 37px; margin-bottom: -8px;">
+      <img class="imgL" src="assets/img/logo.png" />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding color="fundo">
+
+  <ion-title class="titulo">
+    Cadastrar/Editar endereço
+  </ion-title>
+
+  <form [formGroup]="formEndereco" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">CEP</ion-label>
+      <ion-input type="number" formControlName="cep" placeholder="Somente números"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Endereço</ion-label>
+      <ion-input type="text" formControlName="rua"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Número</ion-label>
+      <ion-input type="text" formControlName="numero"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label position="stacked">Bairro</ion-label>
+      <ion-input type="text" formControlName="bairro"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Complemento</ion-label>
+      <ion-input type="text" formControlName="complemento" placeholder="Apto / Bloco / Casa"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Ponto de Referência</ion-label>
+      <ion-input type="text" formControlName="referencia"></ion-input>
+    </ion-item>
+
+
+    <div margin-vertical>
+      <ion-button color="primary" expand="block" type="submit" (click)='voltar()'>Salvar</ion-button>
+    </div>
+  </form>
+  <ion-fab vertical="bottom" style="margin-bottom: -200px;" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="logar()" color="primary">
+      <ion-icon name="person"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-content>
+    <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 50px;" slot="fixed" click="">
+      <ion-fab-button (click)="comprar()" color="secondary">
+        <ion-icon name="cart"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>

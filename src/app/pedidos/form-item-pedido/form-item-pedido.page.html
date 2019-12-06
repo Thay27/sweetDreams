@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <img class="imgL" src="assets/img/logo.png" />
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="fundo">
+<ion-card color="secondary">
+    <img class="img" [src]="produtoImg" />
+  <h1>{{ produto.nome }}</h1>
+  <pre text-wrap>{{ produto.descricao }}</pre>
+</ion-card>
+<ion-content color="fundo">
+  <app-valor style="margin-left: 11px;" [valor]="produto.preco"></app-valor>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <ion-item color="fundo">
+      <ion-label position="stacked">Quantidade</ion-label>
+      <ion-input type="number" min="0" step="1" formControlName="quantidade" (ionChange)="executaCalcularTotal()"></ion-input>
+    </ion-item>
+
+    <ion-item color="fundo">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="primary" (click)="adicionarQuantidade()">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="primary" (click)="removerQuantidade()">
+              <ion-icon name="remove"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <ion-item color="fundo">
+        <ion-label position="stacked">KG</ion-label>
+        <ion-input type="number" min="0" step="1" formControlName="peso" (ionChange)="executaCalcularTotalPeso()"></ion-input>
+      </ion-item>
+  
+      <ion-item color="fundo">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button expand="block" color="primary" (click)="adicionarPeso()">
+                <ion-icon name="add"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button expand="block" color="primary" (click)="removerPeso()">
+                <ion-icon name="remove"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+  
+    <ion-item color="secondary">  
+      <ion-label position="stacked">Observação</ion-label>
+      <ion-textarea formControlName="observacao"></ion-textarea>
+    </ion-item>
+
+    <ion-item color="fundo" text-end>
+      <ion-label>
+        <h2>Total: <app-valor [valor]="total"></app-valor></h2>
+      </ion-label>
+    </ion-item>
+
+    <div margin-vertical>
+      <ion-button expand="block" type="submit" (click)="adicionarCarrinho()">Adicionar ao carrinho</ion-button>
+    </div>
+

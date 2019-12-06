@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <img class="imgL" src="assets/img/logo.png" />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div>
+</div>
+
+<ion-content padding color="fundo">
+    <ion-title class="titulo">
+        Meus Endereços
+      </ion-title>
+        
+  <ion-list>
+    <ion-item-sliding color="fundo">
+      <ion-item (click)="setEnderecoSelecionado(endereco)">
+        <ion-label text-wrap>
+          {{endereco.cep}}
+        </ion-label>
+        <ion-label text-wrap>
+          {{endereco.rua}}
+        </ion-label>
+        <ion-label text-wrap>
+          {{endereco.numero}}
+        </ion-label>
+        <ion-label text-wrap>
+          {{endereco.bairro}}
+        </ion-label>
+        <ion-label text-wrap>
+          {{endereco.complemento}}
+        </ion-label>
+        <ion-label text-wrap>
+          {{endereco.referencia}}
+        </ion-label>
+
+      </ion-item>
+
+
+      <ion-item-options side="start">
+        <ion-item-option color="secondary" (click)="editar(endereco.key)">
+          <ion-icon name="create"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="remover(endereco)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab horizontal="end">
+    <ion-fab-button color="tertiary" [routerLink]="['/criar-endereco']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" style="margin-bottom: -200px;" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="logar()" color="primary">
+      <ion-icon name="person"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+  <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 50px;" slot="fixed" click="">
+    <ion-fab-button (click)="comprar()" color="secondary">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

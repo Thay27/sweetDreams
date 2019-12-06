@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="font-family: 'Pristina'; font-size: 37px; margin-bottom: -8px;">
+      <img class="imgL" src="assets/img/logo.png" />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<img class="img" src="assets/img/bolos-prontos.png" />
+
+<ion-content padding color="fundo">
+
+
+  <ion-grid>
+    <ion-card>
+    <ion-item color="secondary">
+      
+        <ion-label>Categoria</ion-label>
+        <ion-select (ionChange)="buscarProdutos()" [(ngModel)]="categoriaSelecionada">
+          <ion-select-option value="" [selected]="true">Todas</ion-select-option>
+          <ion-select-option *ngFor="let categoria of categorias | async" [value]="categoria.key">{{ categoria.nome }}
+          </ion-select-option>
+        </ion-select>
+      
+    </ion-item>
+  </ion-card>
+    <ion-item color="fundo" *ngFor="let produto of produtos | async" (click)="adicionarProduto(produto.key)">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card color="secondary">
+              <img class="img" [src]="produto.img"/>
+              <ion-label text-wrap>
+                <h1 style="text-align: center; color: black;">{{ produto.nome }} {{ produto.peso }}</h1>
+                <!-- <h2>{{ produto.descricaoNome }}</h2> -->
+                <!-- <span>{{ produto.preco | currency:'BRL' }}</span> -->
+                <br>
+                <h2 style="text-align: right;">
+                  <app-valor [valor]="produto.preco"></app-valor>
+                </h2>
+
+              </ion-label>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" style="margin-bottom: 115px;" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="logar()" color="primary">
+      <ion-icon name="person"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 50px;" slot="fixed" click="">
+    <ion-fab-button (click)="comprar()" color="secondary">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

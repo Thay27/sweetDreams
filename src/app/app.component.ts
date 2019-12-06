@@ -17,9 +17,14 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: 'Monte seu Bolo',
+      url: '/montagem',
+      icon: 'ice-cream'
+    },
+    {
+      title: 'Bolos Prontos',
+      url: '/catalogo',
+      icon: 'heart'
     }
   ];
 

@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="font-family: 'Pristina'; font-size: 37px; margin-bottom: -8px;">
+      <img class="imgL" src="assets/img/logo.png" />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<img class="img" src="assets/img/monte.png" />
+
+<ion-content color="fundo">
+
+<form [formGroup]="formCriarPedido" (ngSubmit)="onSubmit()">
+
+
+  <ion-card>
+    <ion-item color="secondary">
+
+      <ion-label style="font-family: Pristina; font-size: 30px;">Peso (KG)</ion-label>
+      <ion-select formControlName="montagemPeso">
+        <ion-select-option *ngFor="let itemPeso of peso | async" value="{{itemPeso.nome}}">{{itemPeso.nome}} /KG
+        </ion-select-option>
+      </ion-select>
+
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item color="secondary">
+
+      <ion-label style="font-family: Pristina; font-size: 30px;">Sabor da massa</ion-label>
+      <ion-select formControlName="montagemMassa">
+        <ion-select-option *ngFor="let itemMassa of massa | async" value="{{itemMassa.nome}}">{{itemMassa.nome}}
+        </ion-select-option>
+      </ion-select>
+
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item color="secondary">
+
+      <ion-label style="font-family: Pristina; font-size: 30px;">Recheio</ion-label>
+      <ion-select formControlName="montagemRecheio">
+        <ion-select-option *ngFor="let itemRecheio of recheio  | async" value="{{itemRecheio.nome}}">{{itemRecheio.nome}}
+        </ion-select-option>
+      </ion-select>
+
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item color="secondary">
+
+      <ion-label style="font-family: Pristina; font-size: 30px;">Cobertura</ion-label>
+      <ion-select formControlName="montagemCobertura">
+        <ion-select-option *ngFor="let itemCobertura of cobertura  | async" value="{{itemCobertura.nome}}">{{itemCobertura.nome}}
+        </ion-select-option>
+      </ion-select>
+
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item color="secondary">
+
+      <ion-label style="font-family: Pristina; font-size: 30px;">Decoração</ion-label>
+      <ion-select formControlName="montagemDecoracao">
+        <ion-select-option *ngFor="let itemDecoracao of decoracao  | async" value="{{itemDecoracao.nome}}">{{itemDecoracao.nome}}
+        </ion-select-option>
+      </ion-select>
+
+    </ion-item>
+  </ion-card>
+
+  <!-- <p>Total: <app-valor  [valor]="itensProdutos.preco"></app-valor> -->
+
+  <div margin-vertical>
+    <ion-button expand="block" type="submit">Confirmar pedido</ion-button>
+  </div>
+
+
+  </form>
+
+
+
+
+
+  <ion-fab vertical="bottom" style="margin-bottom: -200px;" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="logar()" color="primary">
+      <ion-icon name="person"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 50px;" slot="fixed" click="">
+    <ion-fab-button (click)="comprar()" color="secondary">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

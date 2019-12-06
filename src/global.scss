@@ -24,3 +24,27 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@font-face {
+    font-family: Pristina;
+    src: url(/assets/fonts/pristina.ttf) format("ttf");
+    font-weight: 200
+    }
+
+.imgL {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.imgM {
+    margin-left: 125px;
+    }
+    
+
+.titulo {
+    font-family: 'Pristina';
+    font-size: 37px; 
+    margin-bottom: 10px;
+    text-align: center;
+
+    }
