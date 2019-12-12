@@ -15,16 +15,18 @@ itensPedido: Observable<any[]>;
 total: number;
 produtos: Observable<any[]>;
 itens: Observable<any[]>;
+preco:number;
 
   constructor(private carrinhoService: CarrinhoService,
-              private alert: AlertService,
-              private produtosService: ProdutosService,
-              private montagemService: MontagemService) { }
+     private alert: AlertService, 
+     private produtosService: ProdutosService,
+     private montagemService: MontagemService) { }
 
   ngOnInit() {
     this.itensPedido = this.carrinhoService.getAll();
+    this.itensPedido = this.carrinhoService.getAll();
     this.produtos = this.produtosService.getAll(null);
-    this.itens = this.montagemService.getAll(null);
+    // this.itens = this.montagemService.getAll(null);
     // this.massa = this.montagemService.getOpcoes('Massa');
     // this.recheio = this.montagemService.getOpcoes('Recheio');
     // this.cobertura = this.montagemService.getOpcoes('Cobertura');

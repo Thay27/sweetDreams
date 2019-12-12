@@ -6,7 +6,10 @@ import { Router } from '@angular/router';
 import { MontagemService } from '../shared/montagem.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
+import { FirebasePath } from './../../core/shared/firebase-path';
+import { map } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'app-lista-montagem',
@@ -20,8 +23,9 @@ export class ListaMontagemPage implements OnInit {
   cobertura: Observable<any[]>;
   decoracao: Observable<any[]>;
   peso: Observable<any[]>;
-  total: number;
-  preco: number;
+  preco: Observable<any[]>;
+  bolos: Observable<any[]>;
+  produto: any = {}
 
     categorias: Observable<any[]>;
     categoriaSelecionada: string;
@@ -43,8 +47,17 @@ export class ListaMontagemPage implements OnInit {
     this.cobertura = this.montagemService.getOpcoes('Cobertura');
     this.decoracao = this.montagemService.getOpcoes('Decoração');
     this.peso = this.montagemService.getOpcoes('Peso');
+    this.preco = this.montagemService.getOpcoes('Preco');
+    // // const subscribe = this.montagemService.getByNome(montagemPeso).subscribe( (produto: any) => {
+    //   subscribe.unsubscribe();
+    //   this.produto = produto;
+      // this.form.patchValue({
+      // produtoKey: produto.preco
+    // })
+      // })
+
+
     this.criarFormulario();
-    // this.executaCalcularTotal();
 
   }
 
@@ -58,23 +71,15 @@ export class ListaMontagemPage implements OnInit {
 
   criarFormulario(){
     this.formCriarPedido = this.formBuilder.group({
+      itemKey: [''],
       montagemDecoracao: [''],
       montagemCobertura: [''],
       montagemRecheio: [''],
       montagemPeso: [''],
       montagemMassa: [''],
+      preco: ['']
     })
   }
-
-  // executaCalcularTotal(){
-  //   this.atualizaTotal(this.formCriarPedido.value.massa);
-  // }
-
-  // atualizaTotal(montagem: number){
-  //   this.total = this.massa.preco * montagem;
-  //   this.formCriarPedido.patchValue({montagem: montagem, total: this.total});
-  // }
-
 
   onSubmit(){
     if (this.formCriarPedido.valid) {
@@ -84,6 +89,33 @@ export class ListaMontagemPage implements OnInit {
           this.router.navigate(['/carrinho']);
         })
     }
+  }
+
+
+  //   atualizarTotalMontagem(itemMontagem: any){
+  //   const total = this.montagemService.calcularTotal(itemMontagem.preco, quantidade);
+  //   this.getTotalPedido();
+  // }
+
+  getCarrinhoProdutosRef(){
+    const path = `${FirebasePath.BOLOS}${this.afAuth.auth.currentUser.uid}/${FirebasePath.ITENS}`;
+    return this.db.list(path);
+  }
+
+  getTotalPedido(){
+    return this.getCarrinhoProdutosRef().snapshotChanges().pipe(
+      map(changes => {
+        return changes
+          .map( (m: any) => (m.payload.val().total) )
+          .reduce( (prev: number, current: number) => {
+            return prev + current;
+          })
+      })
+    )
+  }
+
+  buscarProdutos(){
+    this.bolos = this.itensService.getAll(this.categoriaSelecionada);
   }
 
 

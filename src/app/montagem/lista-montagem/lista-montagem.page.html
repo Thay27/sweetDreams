@@ -76,9 +76,12 @@
     </ion-item>
   </ion-card>
 
-  <!-- <p>Total: <app-valor  [valor]="itensProdutos.preco"></app-valor> -->
+  <!-- <p>Preço: <app-valor *ngFor="let itemPreco of preco  | async" [valor]="itemPreco.preco">{{itemPreco.nome}}></app-valor>
+  </p> -->
+  <!-- <p>Total: <app-valor [valor]="itemPreco.total"></app-valor>
+  </p> -->
 
-  <div margin-vertical>
+<div margin-vertical>
     <ion-button expand="block" type="submit">Confirmar pedido</ion-button>
   </div>
 

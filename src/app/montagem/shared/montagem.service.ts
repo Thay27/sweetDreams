@@ -4,11 +4,12 @@ import { FirebasePath } from 'src/app/core/shared/firebase-path';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class MontagemService {
-
 
   constructor(private db: AngularFireDatabase,
               private afAuth: AngularFireAuth
@@ -31,9 +32,9 @@ export class MontagemService {
 getAll(montagemKey: string = null) {
     return this.db.list(FirebasePath.BOLOS, q => {
       if (montagemKey) {
-        return q.orderByKey().equalTo(montagemKey);
+        return q.orderByChild('bolos').equalTo(montagemKey);
       } else {
-        return q.orderByChild('montagemMassa');
+        return q.orderByChild('nome');
       }
     }).snapshotChanges().pipe(
       map(changes => {
@@ -50,7 +51,7 @@ getAll(montagemKey: string = null) {
   // }
 
   getCarrinhoItensRef(){
-    const path = `${FirebasePath.BOLOS}${this.afAuth.auth.currentUser.uid}/${FirebasePath.ITENS}`;
+    const path = `${FirebasePath.CARRINHO}${this.afAuth.auth.currentUser.uid}/${FirebasePath.ITENS}`;
     return this.db.list(path);
   }
 
@@ -69,18 +70,21 @@ getAll(montagemKey: string = null) {
     )
   }
 
+  calcularTotal(preco: number, quantidade: number){
+    return preco * quantidade;
+  }
+
   // Buscar Produtos por uma Key
-  getByKey(key: string){
+  getByNome(nome: string){
                  // 'produtos/'+'-L5sWLlqdjxFeH6a19Q-'
                  //  path ='produtos/-L5sWLlqdjxFeH6a19Q-'
-    const path = `${FirebasePath.ITENS}${key}`;
+    const path = `${FirebasePath.ITENS}${nome}`;
     return this.db.object(path).snapshotChanges().pipe(
       map(change => {
-        return ({ key: change.key, ...change.payload.val() });
+        return ({ nome: change.key, ...change.payload.val() });
       })
     )
   }
-
 
   // getOpcoes(op:string){
   //   return this.db.list(FirebasePath.MONTAGEM, q => {

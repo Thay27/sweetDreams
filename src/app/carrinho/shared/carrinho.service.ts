@@ -16,6 +16,12 @@ export class CarrinhoService {
     return this.db.list(path);
   }
 
+  getCarrinhoItensRef(){
+    const path = `${FirebasePath.CARRINHO}${this.afAuth.auth.currentUser.uid}/${FirebasePath.ITENS}`;
+    return this.db.list(path);
+  }
+
+
   insert(itemProduto: any){
     return this.getCarrinhoProdutosRef().push(itemProduto);
   }
@@ -47,6 +53,15 @@ export class CarrinhoService {
       })
     )
   }
+
+  getAllItens(){
+    return this.getCarrinhoItensRef().snapshotChanges().pipe(
+      map(changes => {
+        return changes.map(m => ({key: m.payload.key, ...m.payload.val() }) )
+      })
+    )
+  }
+
 
   getTotalPedido(){
     return this.getCarrinhoProdutosRef().snapshotChanges().pipe(

@@ -26,9 +26,11 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @font-face {
-    font-family: Pristina;
+    font-family: 'Pristina';
     src: url(/assets/fonts/pristina.ttf) format("ttf");
-    font-weight: 200
+    font-style: normal;
+    font-weight: normal;
+
     }
 
 .imgL {

@@ -13,7 +13,7 @@
   <ion-content padding color="fundo">
     <ion-card color="fundo">
       <ion-list color="fundo">
-        <ion-item color="fundo" *ngFor="let item of itensPedido | async">
+        <ion-item color="fundo" *ngFor="let item of itensPedido| async">
           <ion-label text-wrap>
             <h1>{{ item.produtoNome }}</h1>
             <pre *ngIf="item.produtoDescricao" text-wrap>{{ item.produtoDescricao }}</pre>
@@ -45,29 +45,15 @@
         </ion-item>
       </ion-list>
     </ion-card>
-
+    
     <ion-card>
       <ion-list color="fundo">
-        <ion-item color="fundo" *ngFor="let itensProdutos of itens| async">
+        <ion-item color="fundo" *ngFor="let itensProdutos of itensPedido| async">
           <ion-label text-wrap>
-            <h1>{{ itensProdutos.itens }}</h1>
-            <pre *ngIf="itensProdutos.observacao" text-wrap>{{ itensProdutos.observacao }}</pre>
-            <p>Total: <app-valor [valor]="itensProdutos.total"></app-valor>
-            </p>
-
-            <ion-grid color="fundo">
-              <ion-row align-items-center>
-                <ion-col text-center>
-                  {{ itensProdutos.quantidade }}
-                </ion-col>
-                <ion-col>
-                  <ion-button expand="block" color="primary" (click)="removerQuantidadeItens(itens)">
-                    <ion-icon name="remove"></ion-icon>
-                  </ion-button>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-
+            <p>{{ itensProdutos.montagemMassa }}</p>
+            <p>{{ itensProdutos.montagemRecheio }}</p>
+            <p>{{ itensProdutos.montagemCobertura }}</p>
+            <p>{{ itensProdutos.montagemDecoracao }}</p>
           </ion-label>
         </ion-item>
       </ion-list>

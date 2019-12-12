@@ -24,12 +24,10 @@ export class FormPagamentoPage implements OnInit {
   ];
   // enderecoSelecionado: string = this.MENSAGEM_ENDERECO_VAZIO;
 
-  constructor(private FormBuilder: FormBuilder, 
-                      private carrinhoService: CarrinhoService,
-                      private modalCtrl: ModalController, 
-                      private pedidosService: PedidosService,
-                      private router: Router,
-                      private toast: ToastService) { }
+  constructor(private FormBuilder: FormBuilder, private carrinhoService: CarrinhoService,
+    private modalCtrl: ModalController, private pedidosService: PedidosService,
+    private router: Router,
+    private toast: ToastService) { }
 
   ngOnInit() {
     this.criarFormulario();
